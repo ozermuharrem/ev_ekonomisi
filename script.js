@@ -61,3 +61,54 @@ function addNewItem(e){
         alert('add new item');
     }
 }
+
+const gelir_form = document.querySelector('.gelir_form');
+const aciklama = document.querySelector('.aciklama');
+const number_input = document.querySelector('.number_input');
+const deleteAll = document.querySelector('#deleteAll');
+const task_list = document.querySelector('.task-list')
+
+eventListener();
+
+function eventListener(){
+    gelir_form.addEventListener('submit',yeni_gelir_ekle);
+
+}
+
+function yeni_gelir_ekle(e)
+{
+    if(aciklama.value === '' && number_input.value === '')
+    {
+        alert('Lütfen Verileri Giriniz');
+    }
+    else if(aciklama.value === '')
+    {
+        alert('Lütfen Açıklamanızı Giriniz');
+    }
+    else if(number_input.value === '')
+    {
+        alert('Lütfen Gelirinizi Giriniz');
+    }
+    
+    const li = document.createElement('li');
+
+    li.className = 'list-group-item list-group-item-secondary';
+    //li.appendChild(document.createTextNode(aciklama.value));
+    li.appendChild(document.createTextNode(number_input.value));
+
+    const a = document.createElement('a');
+
+    a.classList = 'delete-item float-right';
+    a.setAttribute('href','#');
+    a.innerHTML = '<i class="fas fa-times"></i>';
+
+    li.appendChild(a); 
+
+    task_list.appendChild(li);
+
+    console.log(task_list)
+    
+    
+    
+    e.preventDefault();
+}
