@@ -15,7 +15,7 @@ else if(donem.getMonth() == 1)
 }
 else if(donem.getMonth() == 2)
 {
-    console.log("Mart");
+    ay = document.querySelector('.ay').innerHTML = "Mart";
 }
 else if(donem.getMonth() == 3)
 {
@@ -52,4 +52,12 @@ else if(donem.getMonth() == 10)
 else if(donem.getMonth() == 11)
 {
     console.log("Aralık");
+} 
+
+let input_aciklama = document.querySelector('.aciklama');
+
+function addNewItem(e){
+    if(input_aciklama.value === ''){
+        alert('add new item');
+    }
 }
