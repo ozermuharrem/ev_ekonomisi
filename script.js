@@ -3,8 +3,6 @@ let ay;
 
 donem = new Date(); 
 
-console.log(donem.getMonth()); 
-
 if(donem.getMonth() == 0)
 {
     console.log("Ocak");
@@ -66,14 +64,14 @@ const gelir_form = document.querySelector('.gelir_form');
 const aciklama = document.querySelector('.aciklama');
 const number_input = document.querySelector('.number_input');
 const deleteAll = document.querySelector('#deleteAll');
-const task_list = document.querySelector('.task-list')
+const task_list = document.querySelector('.task-list');
 
 eventListener();
 
 function eventListener(){
     gelir_form.addEventListener('submit',yeni_gelir_ekle);
 
-}
+} 
 
 function yeni_gelir_ekle(e)
 {
@@ -93,10 +91,18 @@ function yeni_gelir_ekle(e)
     const li = document.createElement('li');
 
     li.className = 'list-group-item list-group-item-secondary';
-    //li.appendChild(document.createTextNode(aciklama.value));
-    li.appendChild(document.createTextNode(number_input.value));
+    li.appendChild(document.createTextNode(aciklama.value+' '))+li.appendChild(document.createTextNode(number_input.value)); 
+    var gelir_arr = [];
+    gelir_arr[0] = null;
+    
+    gelir_arr.push(number_input.value); 
 
-    const a = document.createElement('a');
+    console.log(gelir_arr[0]);
+    console.log(gelir_arr[1]);
+    console.log(gelir_arr[2]);
+    //li.createInnerHTML(gelir_arr[1]);
+
+    const a = document.createElement('li');
 
     a.classList = 'delete-item float-right';
     a.setAttribute('href','#');
@@ -106,9 +112,12 @@ function yeni_gelir_ekle(e)
 
     task_list.appendChild(li);
 
-    console.log(task_list)
-    
-    
-    
+  
     e.preventDefault();
-}
+} 
+
+let sayi;
+
+let sayi1 = parseInt(sayi);
+
+console.log(typeof sayi1);
