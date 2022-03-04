@@ -70,6 +70,7 @@ eventListener();
 
 function eventListener(){
     gelir_form.addEventListener('submit',yeni_gelir_ekle);
+    gelir_add_arr('click')
 
 } 
 
@@ -91,16 +92,15 @@ function yeni_gelir_ekle(e)
     const li = document.createElement('li');
 
     li.className = 'list-group-item list-group-item-secondary';
-    li.appendChild(document.createTextNode(aciklama.value+' '))+li.appendChild(document.createTextNode(number_input.value)); 
+    li.appendChild(document.createTextNode(aciklama.value+' '))+li.appendChild(document.createTextNode(number_input.value));
     var gelir_arr = [];
     gelir_arr[0] = null;
-    
-    gelir_arr.push(number_input.value); 
 
-    console.log(gelir_arr[0]);
-    console.log(gelir_arr[1]);
-    console.log(gelir_arr[2]);
-    //li.createInnerHTML(gelir_arr[1]);
+    while (gelir_arr >= 0)
+    {
+        gelir_arr.push(number_input.value);
+        li++;
+    }
 
     const a = document.createElement('li');
 
@@ -121,3 +121,8 @@ let sayi;
 let sayi1 = parseInt(sayi);
 
 console.log(typeof sayi1);
+
+console.log(gelir_arr[0]);
+console.log(gelir_arr[1]);
+console.log(gelir_arr[2]);
+//li.createInnerHTML(gelir_arr[1]);
