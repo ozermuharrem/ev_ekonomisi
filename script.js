@@ -53,13 +53,6 @@ else if(donem.getMonth() == 11)
 } 
 
 let input_aciklama = document.querySelector('.aciklama');
-
-function addNewItem(e){
-    if(input_aciklama.value === ''){
-        alert('add new item');
-    }
-}
-
 const gelir_form = document.querySelector('.gelir_form');
 const aciklama = document.querySelector('.aciklama');
 const number_input = document.querySelector('.number_input');
@@ -70,9 +63,10 @@ eventListener();
 
 function eventListener(){
     gelir_form.addEventListener('submit',yeni_gelir_ekle);
-    gelir_add_arr('click')
-
+    task_list.addEventListener('click',deleteItem);
+    deleteAll.addEventListener('click',deleteAllItem);
 } 
+
 
 function yeni_gelir_ekle(e)
 {
@@ -93,16 +87,8 @@ function yeni_gelir_ekle(e)
 
     li.className = 'list-group-item list-group-item-secondary';
     li.appendChild(document.createTextNode(aciklama.value+' '))+li.appendChild(document.createTextNode(number_input.value));
-    var gelir_arr = [];
-    gelir_arr[0] = null;
 
-    while (gelir_arr >= 0)
-    {
-        gelir_arr.push(number_input.value);
-        li++;
-    }
-
-    const a = document.createElement('li');
+    const a = document.createElement('a');
 
     a.classList = 'delete-item float-right';
     a.setAttribute('href','#');
@@ -112,17 +98,36 @@ function yeni_gelir_ekle(e)
 
     task_list.appendChild(li);
 
+    //clear input 
+
+    number_input.value = '';
+    input_aciklama.value = '';
+
+    console.log(li);
+
   
     e.preventDefault();
 } 
 
-let sayi;
+function deleteItem(e){ 
+    if(e.target.className === 'fas fa-times'){
+        e.target.parentElement.parentElement.remove();
+    }
 
-let sayi1 = parseInt(sayi);
+    e.preventDefault();
+}
 
-console.log(typeof sayi1);
+function deleteAllItem(){
+    if(confirm('Eminmisiniz ?'))
+    {
+        task_list.innerHTML=''; // birinci yöntem 
 
-console.log(gelir_arr[0]);
-console.log(gelir_arr[1]);
-console.log(gelir_arr[2]);
-//li.createInnerHTML(gelir_arr[1]);
+        // ikinci yöntem 
+        /*
+        task_list.childNodes.forEach(function(item){
+            if(item.nodeType===1){
+                item.remove();
+            }
+        }) */
+    }
+}
