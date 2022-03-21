@@ -1,5 +1,7 @@
 let donem;
 let ay;
+let para = [];
+let tpl = 0;
 
 donem = new Date();
 
@@ -69,12 +71,28 @@ function yeni_gelir_ekle(e) {
 
   task_list.appendChild(li);
 
+  
+
+  para.push(parseInt(number_input.value));
+
+
+  console.log(typeof para[0]);
+
   //clear input
 
   number_input.value = "";
   input_aciklama.value = "";
 
   console.log(li);
+
+ 
+
+  tpl = 0;
+  for (let index = 0; index < para.length; index++) {
+    tpl += para[index];
+  
+  }
+  console.log(tpl);
 
   e.preventDefault();
 }
@@ -100,6 +118,14 @@ function deleteAllItem() {
         }) */
   }
 } 
+let sonuc = 0;
+
+
+for (let index = 0; index < para.length; index++) {
+  sonuc += para[index];
+  
+}
+console.log(sonuc);
 
 var toplam_gelir = 10000;
 var toplam_gider = {
