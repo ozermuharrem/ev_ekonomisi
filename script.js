@@ -6,30 +6,31 @@ let tpl = 0;
 donem = new Date();
 
 if (donem.getMonth() == 0) {
-  console.log("Ocak");
+  ay = document.querySelector(".ay").innerHTML = "Ocak";
 } else if (donem.getMonth() == 1) {
   ay = document.querySelector(".ay").innerHTML = "Şubat";
 } else if (donem.getMonth() == 2) {
   ay = document.querySelector(".ay").innerHTML = "Mart";
 } else if (donem.getMonth() == 3) {
-  console.log("Nisan");
+  ay = document.querySelector(".ay").innerHTML = "Nisan";
 } else if (donem.getMonth() == 4) {
-  console.log("Mayıs");
+  ay = document.querySelector(".ay").innerHTML = "Mayıs";
 } else if (donem.getMonth() == 5) {
-  console.log("Haziran");
+  ay = document.querySelector(".ay").innerHTML = "Haziran";
 } else if (donem.getMonth() == 6) {
-  console.log("Temmuz");
+  ay = document.querySelector(".ay").innerHTML = "Temmuz";
 } else if (donem.getMonth() == 7) {
-  console.log("Ağustos");
+  ay = document.querySelector(".ay").innerHTML = "Ağustos";
 } else if (donem.getMonth() == 8) {
-  console.log("Eylül");
+  ay = document.querySelector(".ay").innerHTML = "Eylül";
 } else if (donem.getMonth() == 9) {
-  console.log("Ekim");
+  ay = document.querySelector(".ay").innerHTML = "Ekim";
 } else if (donem.getMonth() == 10) {
-  console.log("Kasım");
+  ay = document.querySelector(".ay").innerHTML = "Kasım";
 } else if (donem.getMonth() == 11) {
-  console.log("Aralık");
+  ay = document.querySelector(".ay").innerHTML = "Aralık";
 }
+
 
 let input_aciklama = document.querySelector(".aciklama");
 const gelir_form = document.querySelector(".gelir_form");
@@ -37,6 +38,8 @@ const aciklama = document.querySelector(".aciklama");
 const number_input = document.querySelector(".number_input");
 const deleteAll = document.querySelector("#deleteAll");
 const task_list = document.querySelector(".task-list");
+const gelir_ekle = document.querySelector("#gelir_ekle")
+const toplam_gelir = document.querySelector(".toplam_gelir")
 
 eventListener();
 
@@ -44,6 +47,8 @@ function eventListener() {
   gelir_form.addEventListener("submit", yeni_gelir_ekle);
   task_list.addEventListener("click", deleteItem);
   deleteAll.addEventListener("click", deleteAllItem);
+  gelir_ekle.addEventListener("click",gelir_tpl);
+  
 }
 
 function yeni_gelir_ekle(e) {
@@ -71,13 +76,6 @@ function yeni_gelir_ekle(e) {
 
   task_list.appendChild(li);
 
-  
-
-  para.push(parseInt(number_input.value));
-
-
-  console.log(typeof para[0]);
-
   //clear input
 
   number_input.value = "";
@@ -85,22 +83,32 @@ function yeni_gelir_ekle(e) {
 
   console.log(li);
 
- 
+  e.preventDefault();
+}
 
+function gelir_tpl(e){
+  para.push(parseInt(number_input.value));
   tpl = 0;
   for (let index = 0; index < para.length; index++) {
     tpl += para[index];
+    console.log(`${index}.index: ${para[index]}`)
   
   }
-  console.log(tpl);
+  toplam_gelir.innerHTML = tpl;
 
-  e.preventDefault();
+  console.log(tpl)
+
+  //e.preventDefault();
+
+  return (tpl);
 }
 
 function deleteItem(e) {
   if (e.target.className === "fas fa-times") {
     e.target.parentElement.parentElement.remove();
   }
+
+  console.log(`kimi seviyorsun -- tpl ${para[2]}`);
 
   e.preventDefault();
 }
@@ -118,16 +126,10 @@ function deleteAllItem() {
         }) */
   }
 } 
-let sonuc = 0;
 
 
-for (let index = 0; index < para.length; index++) {
-  sonuc += para[index];
-  
-}
-console.log(sonuc);
 
-var toplam_gelir = 10000;
+//var toplam_gelir = 10000;
 var toplam_gider = {
   Kira: 2000,
   Kredi: 5000,
