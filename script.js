@@ -38,8 +38,9 @@ const aciklama = document.querySelector(".aciklama");
 const number_input = document.querySelector(".number_input");
 const deleteAll = document.querySelector("#deleteAll");
 const task_list = document.querySelector(".task-list");
-const gelir_ekle = document.querySelector("#gelir_ekle")
-const toplam_gelir = document.querySelector(".toplam_gelir")
+const gelir_ekle = document.querySelector("#gelir_ekle");
+const toplam_gelir = document.querySelector(".toplam_gelir");
+const ul = document.querySelector("ul");
 
 eventListener();
 
@@ -81,8 +82,6 @@ function yeni_gelir_ekle(e) {
   number_input.value = "";
   input_aciklama.value = "";
 
-  console.log(li);
-
   e.preventDefault();
 }
 
@@ -103,12 +102,39 @@ function gelir_tpl(e){
   return (tpl);
 }
 
+
 function deleteItem(e) {
+
+
+  let i; 
+
+  let str = e.target.innerText;
+
+  // while(i <= str.length)
+  // {
+
+  //   if(str[i]==U+0030)
+  //   {
+  //     console.log("numberi buldun");
+  //   }
+  //   console.log(`${i}.index te  ${str[i]} var`);
+    
+    
+  // }
+  // console.log(typeof e.target.innerText)
+  // while[e.target.innerText[i]===typeof Number]
+  // {
+  //   console.log("numarayı buldun");
+  // }
+  
+ // console.log("e.target.parent"+e.target.parentElement);
+ // console.log("e.target.parent.parent"+e.target.parentElement.parentElement);
+
   if (e.target.className === "fas fa-times") {
+    
     e.target.parentElement.parentElement.remove();
   }
 
-  console.log(`kimi seviyorsun -- tpl ${para[2]}`);
 
   e.preventDefault();
 }
@@ -126,6 +152,8 @@ function deleteAllItem() {
         }) */
   }
 } 
+
+
 
 
 
