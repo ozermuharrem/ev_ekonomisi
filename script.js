@@ -41,6 +41,7 @@ const task_list = document.querySelector(".task-list");
 const gelir_ekle = document.querySelector("#gelir_ekle");
 const toplam_gelir = document.querySelector(".toplam_gelir");
 const ul = document.querySelector("ul");
+let ul_li = document.querySelector(".task_list > li")
 
 eventListener();
 
@@ -105,19 +106,34 @@ function gelir_tpl(e){
 
 function deleteItem(e) {
 
- let val;
- console.log(val)
+  
 
-  val = ul.children[0].childNodes[1].textContent;
-  console.log(val);
+  // while(i <= str.length)
+  // {
 
-
-// console.log(e.target.parentElement.parentElement[1]);  
+  //   if(str[i]==U+0030)
+  //   {
+  //     console.log("numberi buldun");
+  //   }
+  //   console.log(`${i}.index te  ${str[i]} var`);
+    
+    
+  // }
+  // console.log(typeof e.target.innerText)
+  // while[e.target.innerText[i]===typeof Number]
+  // {
+  //   console.log("numarayı buldun");
+  // }
+  
+ // console.log("e.target.parent"+e.target.parentElement);
+ // console.log("e.target.parent.parent"+e.target.parentElement.parentElement);
 
   if (e.target.className === "fas fa-times") {
     
     e.target.parentElement.parentElement.remove();
   }
+
+
   e.preventDefault();
 }
 
