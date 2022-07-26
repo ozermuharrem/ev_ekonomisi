@@ -1,3 +1,11 @@
 nav{
     background-color: #D9D9D9;
 }
+.dropdown-toggle::after {
+    display: none;;
+}
+.task{
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+}
