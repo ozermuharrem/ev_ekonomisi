@@ -1,19 +1,39 @@
-let gider = [];
+
+let gider =[{
+    "id" : 1,
+    "giderTur" : "Banka",
+    "giderAciklama" : "Vakıfbak Kredi",
+    "giderTutar" : 1750
+},
+{
+    "id" : 2,
+    "giderTur" : "Kira",
+    "giderAciklama" : "Kirazpınar",
+    "giderTutar" : 11500
+}];
 
 let giderDataList,
     aciklama,
     giderTutar,
     giderSave,
     giderList,
-    giderToplam;
+    giderToplam,
+	giderEditId,
+	giderisEditTask = false;
 
 giderDataList = document.querySelector("#giderDataList");
 aciklama = document.querySelector("#aciklama");
 giderTutar = document.querySelector("#giderTutar");
-giderSave = document.querySelector("#giderSava");
-giderList = document.querySelector("#giderList")
+giderSave = document.querySelector("#giderSave");
+giderList = document.querySelector("#giderList");
+gdrToplam = document.querySelector(".giderToplam");
 
 giderDisplayList();
+eventListener();
+
+function eventListener(){
+	giderSave.addEventListener("click",giderEkle);
+}
 
 function giderDisplayList(){
     giderList.innerHTML = "";
@@ -30,8 +50,8 @@ function giderDisplayList(){
                 <i class="fa-solid fa-ellipsis"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a onclick="deleteTask(${index.id})" class="dropdown-item" href="#"><i class="fa-solid fa-trash-can"></i> Sil</a></li>
-                <li><a onclick='editTask(${index.id}, "${index.giderTur}", "${index.giderAciklama}", ${index.giderTutar})' class="dropdown-item" href="#"><i class="fa-solid fa-pen"></i> Düzenle</a></li>
+                <li><a onclick="giderDeleteTask(${index.id})" class="dropdown-item" href="#"><i class="fa-solid fa-trash-can"></i> Sil</a></li>
+                <li><a onclick='giderEditTask(${index.id}, "${index.giderTur}", "${index.giderAciklama}", ${index.giderTutar})' class="dropdown-item" href="#"><i class="fa-solid fa-pen"></i> Düzenle</a></li>
         </ul>
         </li>`
 
@@ -45,15 +65,79 @@ let giderValueClear = () => {
     giderTutar.value = "";
 }
 
-let toplamGoster = () =>{
+let giderToplamGoster = () =>{
     giderToplam = 0;
     for(let i of gider)
     {
         giderToplam = giderToplam + i.giderTutar;
     }
     
-   gelirToplam.innerHTML = toplam;
+   gdrToplam.innerHTML = giderToplam;
 }
 
-toplamGoster();
+giderToplamGoster();
+
+function giderEkle(e) {
+
+	if(giderDataList.value == "" && aciklama.value == "" && giderTutar.value == "")
+		alert("Lütfen Değerleri Tam ve Eksiksiz Giriniz");
+	else{
+		if(!giderisEditTask)
+		{
+			gider.push({
+                "id" : gider.length+1,
+                "giderTur" : giderDataList.value,
+                "giderAciklama" : aciklama.value,
+                "giderTutar" : parseInt(giderTutar.value)
+            })
+		}
+		else{
+            for(let lst of gider)
+            {
+                if(lst.id == giderEditId)
+                {
+                    lst.giderTur = giderDataList.value;
+                    lst.giderAciklama = aciklama.value;
+                    lst.giderTutar = parseInt(giderTutar.value);
+                }
+                giderisEditTask = false;
+            }
+        }
+		giderValueClear();
+		giderToplamGoster();
+		giderDisplayList();
+	}
+	e.preventDefault();
+}
+
+function giderDeleteTask(id)
+{
+    let deleteId;
+
+    for(let i in gider)
+    {
+        if(gider[i].id == 1)
+        {
+            deleteId = i;
+        }
+    }
+    gider.splice(deleteId,1);
+
+    giderToplamGoster();
+    giderDisplayList();
+}
+
+function giderEditTask(taskId,taskTur,taskAciklama,taskTutar){
+    giderEditId = taskId;
+    giderisEditTask = true;
+    giderDataList.value = taskTur;
+    giderDataList.focus();
+    aciklama.value =  taskAciklama;
+    aciklama.focus();
+    giderTutar.value =  taskTutar;
+    giderTutar.focus();
+
+}
+
+
 
