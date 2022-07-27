@@ -6,22 +6,15 @@
 /*   By: mozer <mozer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:04:13 by mozer             #+#    #+#             */
-/*   Updated: 2022/07/26 03:13:16 by mozer            ###   ########.fr       */
+/*   Updated: 2022/07/28 01:50:48 by mozer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-let gelir = [];/*= [{
-    "id" : 1,
-    "tur" : "Maaş",
-    "kisi" : "Muharrem",
-    "tutar" : 1750
-},
-{
-    "id" : 2,
-    "tur" : "Maaş",
-    "kisi" : "Betül",
-    "tutar" : 11500
-}]*/;
+let gelir = [];
+
+if (localStorage.getItem("gelir") !== null){
+	gelir = JSON.parse(localStorage.getItem("gelir"));
+}
 
 let gelirSave = document.querySelector("#gelirSave");
 let kisi = document.querySelector("#kisi");
@@ -29,7 +22,7 @@ let tutar = document.querySelector("#tutar");
 let gelirList = document.querySelector("#gelirList");
 let dataList = document.querySelector("#dataList");
 let gelirToplam = document.querySelector(".gelirToplam");
-//let deleteTask = document.querySelector("")
+let sonuc = document.querySelector(".sonuc");
 let toplam = 0;
 let editId;
 let isEditTask = false;
@@ -80,6 +73,7 @@ let toplamGoster = () =>{
     }
     
     gelirToplam.innerHTML = toplam;
+	sonuc.innerHTML = toplam;
 }
 
 toplamGoster();
@@ -114,6 +108,7 @@ function gelirEkle(e){
         inputValueClear();
         toplamGoster();
         displayList();
+		localStorage.setItem("gelir",JSON.stringify(gelir));
     }
 
     e.preventDefault();
@@ -133,6 +128,7 @@ function deleteTask(id)
     gelir.splice(deleteId,1);
 
     toplamGoster();
+	localStorage.setItem("gelir",JSON.stringify(gelir));
     displayList();
 }
 
@@ -146,4 +142,41 @@ function editTask(taskId,taskTur,taskKisi,taskTutar){
     tutar.value =  taskTutar;
     tutar.focus();
 
+	localStorage.setItem("gelir",JSON.stringify(gelir));
+
 }
+
+
+// Grafik 
+
+let giders = JSON.parse(localStorage.getItem("gider"));
+console.log(giders);
+
+const labels = [
+	 toplam,
+  ];
+  const data = {
+    labels: ['Gelir','Kira','Kredi','Eğitim'],
+    datasets: [{
+      label: 'Aylık Durum Grafiği',
+      backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(218, 247, 166)' 
+    ],
+      data: [
+		toplam,
+	],
+    }]
+  };
+
+  const config = {
+    type: 'pie',
+    data: data,
+    options: {}
+  };
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+  );

@@ -1,16 +1,8 @@
 
-let gider =[{
-    "id" : 1,
-    "giderTur" : "Banka",
-    "giderAciklama" : "Vakıfbak Kredi",
-    "giderTutar" : 1750
-},
-{
-    "id" : 2,
-    "giderTur" : "Kira",
-    "giderAciklama" : "Kirazpınar",
-    "giderTutar" : 11500
-}];
+let gider = [];
+
+if(localStorage.getItem("gider") !== null)
+	gider = JSON.parse(localStorage.getItem("gider"));
 
 let giderDataList,
     aciklama,
@@ -54,10 +46,8 @@ function giderDisplayList(){
                 <li><a onclick='giderEditTask(${index.id}, "${index.giderTur}", "${index.giderAciklama}", ${index.giderTutar})' class="dropdown-item" href="#"><i class="fa-solid fa-pen"></i> Düzenle</a></li>
         </ul>
         </li>`
-
         giderList.insertAdjacentHTML("beforeend", gdrList);
     }
-
 }
 
 let giderValueClear = () => {
@@ -106,6 +96,7 @@ function giderEkle(e) {
 		giderValueClear();
 		giderToplamGoster();
 		giderDisplayList();
+		localStorage.setItem("gider" , JSON.stringify(gider));
 	}
 	e.preventDefault();
 }
@@ -125,6 +116,7 @@ function giderDeleteTask(id)
 
     giderToplamGoster();
     giderDisplayList();
+	localStorage.setItem("gider" , JSON.stringify(gider));
 }
 
 function giderEditTask(taskId,taskTur,taskAciklama,taskTutar){
@@ -137,7 +129,5 @@ function giderEditTask(taskId,taskTur,taskAciklama,taskTutar){
     giderTutar.value =  taskTutar;
     giderTutar.focus();
 
+	localStorage.setItem("gider" , JSON.stringify(gider));
 }
-
-
-

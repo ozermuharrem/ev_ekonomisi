@@ -9,3 +9,10 @@ nav{
     align-items: center; 
     justify-content: space-between;
 }
+
+#grafik{
+	display: block;
+	height: 500px;
+	width: 500px;
+
+}
