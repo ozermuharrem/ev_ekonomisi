@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div>
+       <div id="here">dynamic content <span id='off'>9</span></div>
+       <div>ABC</div>
+    </div>
+    <script>
+        
+        const detay = [
+            {"id":1,"ay":"ocak"},
+            {"id":2,"ay":"şubat"},
+            {"id":3,"ay":"mart"},
+            {"id":4,"ay":"nisan"},
+            {"id":5,"ay":"mayıs"},
+            {"id":6,"ay":"haziran"},
+            {"id":7,"ay":"temmuz"},
+            {"id":8,"ay":"ağustos"},
+            {"id":9,"ay":"eylül"},
+            {"id":10,"ay":"ekim"},
+            {"id":12,"ay":"kasım"},
+            {"id":13,"ay":"aralık"}
+        ]
+
+        console.log(detay[2].ay);
+        localStorage.setItem("aylar",detay);
+        let aylar = localStorage.getItem("aylar",detay)
+
+       console.log(aylar)
+
+
+
+    </script>
+</body>
+</html>
