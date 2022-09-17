@@ -1,0 +1,31 @@
+    <%- include('partials/_header') %>
+
+<body class="loginPage">
+    <div>
+        <div class="container">
+            <div class="row ortala">
+                <div class="col-lg-8">
+                    <form action="users/login" method="POST">
+                        <div class="row row-fluid">
+                            <div class="col-lg-8 col-md-10 col-sm-10 mx-auto py-3">
+                                <label for="email" class="text-dark"> E Posta Adresiniz</label>
+                                <input type="email" name="email" id="email" class="" placeholder="Email">
+                            </div>
+                            <div class="col-lg-8 col-md-10 col-sm-10 mx-auto py-3">
+                                <label for="password" class="text-dark"> Şifre </label>
+                                <input type="password" name="password" id="password" class="" placeholder="Password">
+                            </div>
+
+                            <div class="col-lg-8 col-md-10 col-sm-10 mx-auto py-3">
+                                <button type="submit" value="LOGIN" id="submit" class="btn btn-outline-success btn-large btn-radius btn-brd grd1 btn-block">LOGIN</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <%- include('partials/_footer') %>

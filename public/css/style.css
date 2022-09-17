@@ -1,0 +1,59 @@
+nav{
+    background-color: #D9D9D9;
+}
+.dropdown-toggle::after {
+    display: none;;
+}
+.task{
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+}
+
+#grafik{
+	display: block;
+	height: 500px;
+	width: 500px;
+
+}
+
+/* index Page */
+.indexPage{
+    background: url(../images/indexPage.jpg) no-repeat center top;
+    background-attachment: fixed;
+    background-size: cover;
+    height:100vh;
+	min-height:100%;
+}
+
+/* login Page */
+.loginPage{
+    background: url(../images/loginPage.jpg) no-repeat center top;
+    background-attachment: fixed;
+    background-size: cover;
+    height:100vh;
+	min-height:100%;
+}
+
+/* signup */
+
+
+#signup-body{
+    background: url(../images/signupPage.jpg) no-repeat center top;
+    background-attachment:fixed;
+	background-size:cover;
+	height:100vh;
+	min-height:100%;
+}
+
+.ortala{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 15px;
+    /* box-shadow: 6px 12px #f2e5d7; */
+    padding: 75px;
+    color: white;
+}
+
