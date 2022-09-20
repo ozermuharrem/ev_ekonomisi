@@ -6,51 +6,23 @@ const Schema = mongoose.Schema;
 
 const GiderSchema = new Schema({
     ay : {
+        type : String,
+        required : true
+
+    },
+    giderTuru : {
+        type: String,
+        required : true
+    },
+    description : {
+        type : String,
+        required : true
+
+    },
+    tutar : {
         type : Number,
         required : true
-
     },
-    banka : {
-        type:Number,
-        required : true
-    },
-    // kira : {
-    //     aciklama : {
-    //         type:String,
-    //     },
-    //     miktar : {
-    //         type: Number,
-    //         default : 0
-    //     }
-
-    // },
-    // ulasim : {
-    //     aciklama : {
-    //         type:String,
-    //     },
-    //     miktar : {
-    //         type: Number,
-    //         default : 0
-    //     }
-    // },
-    // egitim_saglik : {
-    //     aciklama : {
-    //         type:String,
-    //     },
-    //     miktar : {
-    //         type: Number,
-    //         default : 0
-    //     }
-    // } ,
-    // diger : {
-    //     aciklama : {
-    //         type:String,
-    //     },
-    //     miktar : {
-    //         type: Number,
-    //         default : 0
-    //     }
-    // },
     createDate : {
         type: Date,
         default : Date.now
@@ -63,7 +35,7 @@ const GiderSchema = new Schema({
 
 GiderSchema.pre('save', function(next){
     this.slug = slugify(this.ay, {
-        lower : false,
+        lower : true,
         strict:true
     })
     next();

@@ -32,10 +32,12 @@ mongoose.connect('mongodb+srv://mozer-evEkonomisi:l8TQlK55SCnOPSdG@cluster0.7pfm
 })
 
 
-app.use('/', pageRoute);
+app.use('/', pageRoute); // ok 
 app.use('/users', userRoute);
 app.use('/kategoris', kategoriRoute);
 app.use('/giders', giderRoute);
+app.use('/verigiris', giderRoute);
+
 
 const port = 4242;
 
