@@ -1,0 +1,37 @@
+<%- include('partials/_header') %>
+
+<body>
+
+    <%- include('partials/_navigation') %>
+
+    <!-- 
+
+            user,
+            veriGider,
+            kategori
+     -->
+
+    <div class="container">
+        <div class="d-flex">
+            <div class="p-2 flex-fill">User Name : <%= user[0].name %></div>
+            <div class="p-2 flex-fill">Veri Ekle</div>
+            <div class="p-2 flex-fill">Çıkış</div>
+          </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <% for(let i in veriGider){ %>
+
+                <div class="card">
+                    <div class="card-header">
+                        <%= veriGider[i].description %>
+                    </div>
+                </div>
+
+           <% } %>
+        </div>
+    </div>
+    
+
+<%- include('partials/_footer') %>

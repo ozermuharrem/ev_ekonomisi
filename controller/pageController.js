@@ -14,3 +14,7 @@ exports.getEvEkoMainPage = (req, res) => {
     res.status(200).render('evEkoMain')
 }
 
+exports.getUserPage = (req, res) => {
+    res.status(200).render('userpage')
+}
+

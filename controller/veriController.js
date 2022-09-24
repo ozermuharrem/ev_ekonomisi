@@ -1,9 +1,33 @@
 const Gider = require('../models/Gider');
 const Kategori = require('../models/Kategori');
+const User = require('../models/User');
+
 
 // exports.getEvEkoMainPage = (req, res) => {
 //     res.status(200).render('evEkoMain')
 // }
+
+exports.getUserPage = async (req , res ) => {
+    
+    try {
+        const user = await User.find();
+        const veriGider = await Gider.find();
+        const kategori =  await Kategori.find();
+    
+        res.status(200).render('userpage',{
+            user,
+            veriGider,
+            kategori
+        })
+        
+    } catch (error) {
+        res.status(400).json({
+            status : "başarısız",
+            error
+        })
+    }
+
+}
 
 exports.createGider = async (req, res) =>{
 

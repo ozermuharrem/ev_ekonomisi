@@ -5,7 +5,7 @@ const path = require('path')
 const pageRoute = require('./router/pageRoute');
 const userRoute = require('./router/userRoute');
 const kategoriRoute = require('./router/kategoriRoute');
-const giderRoute = require('./router/giderRoute');
+const veriRoute = require('./router/veriRoute');
 
 
 
@@ -35,7 +35,7 @@ mongoose.connect('mongodb+srv://mozer-evEkonomisi:l8TQlK55SCnOPSdG@cluster0.7pfm
 app.use('/', pageRoute); // ok 
 app.use('/users', userRoute);
 app.use('/kategoris', kategoriRoute);
-app.use('/evEkoMain', giderRoute);
+app.use('/userpage', veriRoute);
 
 
 const port = 4242;
