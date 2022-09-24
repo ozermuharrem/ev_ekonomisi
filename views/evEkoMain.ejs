@@ -1,4 +1,4 @@
-	<%- include('partials/_header'); %>
+<%- include('partials/_header'); %>
 <body class="m-5">
     <nav class="nav">
         <div class="container text-center text-danger">
@@ -121,12 +121,15 @@
 							  <button id="giderSave" type="submit" class="mb-3 btn btn-sm btn-primary">Kaydet</button>
 						  </div>
 						  <ul id="giderList" class="list-group">
-							<% for(let i = 0 ; i < veriGider.length; i++){ %>
+                            
+							<% for(let i = 0; i < veriGider.length ; i++){ %>
+
+
 							  <li class="task list-group-item">
-								  <%= veriGider[i].ay %>   
-								  <%= veriGider[i].giderTuru %> 
-								  <%= veriGider[i].description %> 
-								  <%= veriGider[i].tutar %> 
+     
+
+
+
 								  <div class="dropdown">
 									  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 										  <i class="fa-solid fa-ellipsis"></i>
@@ -136,8 +139,9 @@
 									  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-pen"></i> Düzenle</a></li>
 								  </ul>
 							  </li>
-
-							  <% } %>
+       
+							<% } %> 	  
+						
 							</ul>
 							<div class="card-text fs-3 mb-5 text-center text-danger">
 							  <p>Gider Toplam: <span class="giderToplam"></span></p>

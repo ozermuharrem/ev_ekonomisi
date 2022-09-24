@@ -1,11 +1,16 @@
 const Gider = require('../models/Gider');
 const Kategori = require('../models/Kategori');
 
+// exports.getEvEkoMainPage = (req, res) => {
+//     res.status(200).render('evEkoMain')
+// }
+
 exports.createGider = async (req, res) =>{
 
         const gider = await Gider.create(req.body);
     try {
-        res.status(201).redirect('verigiris',{
+        res.status(201).json({
+            status : "başarlılı",
             gider
         })
     } catch (error){
@@ -22,7 +27,7 @@ exports.getAllGiders = async (req,res) => {
     const veriGider = await Gider.find();
     const kategori =  await Kategori.find();
 
-    res.status(200).render('verigiris',{
+    res.status(200).render('evEkoMain',{
             veriGider,
             kategori,
             toplam

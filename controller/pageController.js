@@ -9,3 +9,8 @@ exports.getLoginPage = (req, res) => {
 exports.getSignupPage = (req, res) => {
     res.status(200).render('signup')
 }
+
+exports.getEvEkoMainPage = (req, res) => {
+    res.status(200).render('evEkoMain')
+}
+

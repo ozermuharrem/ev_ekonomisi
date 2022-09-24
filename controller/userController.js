@@ -17,23 +17,25 @@ exports.createUser = async (req, res) => {
     }
 }
 
-exports.loginUser = async (reg, res) => {
-    try {
+exports.loginUser = (req, res) => {
+    try{
         const {email , password} = req.body;
-        await User.findOne({email} , (err, user) => {
-            if(user)
-            {
-                bcrypt.compare(password, user.password, (err, some)=>{
-                    if(some)
-                        res.status(200).send('login işlemi başarılı')
+        User.findOne({email}, (err , user) => {
+            if(user) {
+                bcrypt.compare(password, user.password , (err , same) => {
+                    if(same)
+                    // user session
+                        res.status(200).json({
+                            status : "success",
+                            user,
+                        })
                 })
             }
         })
-        
-    } catch (err) {
+    } catch (error) {
         res.status(400).json({
-            status: 'login fail',
-            err
-        })
-    }
-}
+            status : 'fail',
+            error,
+        });
+    };
+};
