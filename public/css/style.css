@@ -1,6 +1,4 @@
-nav{
-    background-color: #D9D9D9;
-}
+
 .dropdown-toggle::after {
     display: none;;
 }
@@ -52,8 +50,13 @@ nav{
     left: 50%;
     transform: translate(-50%,-50%);
     border-radius: 15px;
-    /* box-shadow: 6px 12px #f2e5d7; */
     padding: 75px;
-    color: white;
 }
 
+.nav-hover:hover{
+    background-color: orange;
+}
+
+/* #transparan{
+ background-color: #BAD3DA!important;
+} */

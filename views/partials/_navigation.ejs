@@ -1,4 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-light">
+
+<div class="d-flex justify-content-center" id="transparan">
+  <nav class="navbar navbar-expand-lg bg-none">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">Ev Ekonomisi</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,16 +8,33 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/login">Login</a>
+
+          <% if(!userIN){ %> 
+
+          <li class="nav-item  nav-hover">
+            <a class="nav-link <%= page_name === 'login' && 'active' %>" aria-current="page" href="/login"><span><i class="fa fa-sign-in" aria-hidden="true"></i></span> Login</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">Signup</a>
+          <li class="nav-item nav-hover">
+            <a class="nav-link <%= page_name === 'signup' && 'active' %>" href="/signup"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Signup</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/userpage">UserPage</a>
-          </li>
+
+          <% } %>
+
+
+
+          <% if(userIN){ %> 
+
+            <li class="nav-item nav-hover">
+              <a class="nav-link" href="users/logout"><span><i class="fa fa-circle-xmark" aria-hidden="true"></i></span> Exit</a>
+            </li>
+            <li class="nav-item nav-hover">
+              <a class="nav-link active" href="/userpage">UserPage</a>
+            </li>
+  
+            <% } %>
         </ul>
       </div>
     </div>
   </nav>
+</div>
+

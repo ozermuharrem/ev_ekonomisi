@@ -10,14 +10,15 @@ const User = require('../models/User');
 exports.getUserPage = async (req , res ) => {
     
     try {
-        const user = await User.find();
+        const user = await User.findOne({_id : req.session.userID});
         const veriGider = await Gider.find();
         const kategori =  await Kategori.find();
     
         res.status(200).render('userpage',{
             user,
             veriGider,
-            kategori
+            kategori,
+            page_name : "userpage",
         })
         
     } catch (error) {
@@ -29,12 +30,23 @@ exports.getUserPage = async (req , res ) => {
 
 }
 
+exports.getVeriGirisPage = (req, res) => {
+    try {
+        res.status(200).render('veriGiris');
+    } catch (error) {
+        res.status(404).json({
+            status : "veriGiris Ekranına Ulaşılamadı",
+            error,
+        })
+    }
+}
+
 exports.createGider = async (req, res) =>{
 
-        const gider = await Gider.create(req.body);
     try {
+        const gider = await Gider.create(req.body);
         res.status(201).json({
-            status : "başarlılı",
+            status : "başarılı",
             gider
         })
     } catch (error){

@@ -2,35 +2,6 @@
 <body class="m-5">
 <%- include('partials/_navigation') %>
 
-    <nav class="nav">
-        <div class="container text-center text-danger">
-            <header>
-                <h1>Ev Ekonomisi</h1>
-            </header>
-        </div>
-        <div class="container text-center fs-4">
-            <div class="donemSelector d-inline">
-                <select id="datalistOptions fs-6" class="m-3">
-                    <option value="1">Ocak</option>
-                    <option value="2">Şubat</option>
-                    <option value="3">Mart</option>
-                    <option value="4">Nisan</option>
-                    <option value="5">Mayıs</option>
-                    <option value="6">Haziran</option>
-                    <option value="7">Temmuz</option>
-                    <option value="8">Ağustos</option>  
-                    <option value="9">Eylül</option>
-                    <option value="10">Ekim</option>
-                    <option value="11">Kasım</option>
-                    <option value="12">Aralık</option>
-                </select>
-                <div class="text d-inline">
-                    <span>Dönemi Durumu</span>
-                </div>
-            </div>
-        </div>
-    </nav>
-
 	<main class="container mt-3 py-1 shadow-lg rounded " >
 		<div class="accordion mt-5" id="accordionPanelsStayOpenExample">
 			<!-- <form action="gelirs" method="POST">
@@ -90,24 +61,34 @@
 			</form>
 		 -->
 			<!--  -->
-		 	<form action="giders" method="POST">
+		 	<form action="verigiris/add_giders" method="POST">
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
 					  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-						  Gider Kalemleri
+						  Gider Ekle
 					  </button>
 					</h2>
 					<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
 					  <div class="accordion-body">
 						  <div class="row mb-3">
+							<div class="col-lg-4 ">
+								<label for="ay" class="form-label">Gider Kalemleri</label>
+								<select name="ay"  class="form-control" list="giderDatalistOptions" placeholder="Gider Türünü Giriniz...">
+									<option value="Ocak"> Ocak </option>
+									<option value="Şubat"> Şubat </option>
+									<option value="Mart"> Mart </option>
+									<option value="Nisan"> Nisan </option>
+									<option value="Mayıs"> Mayıs </option>
+								</select>
+							</div>
 							  <div class="col-lg-4 ">
-								  <label for="giderDataList" class="form-label">Gider Kalemleri</label>
-								  <select  id="giderDataList" class="form-control" list="giderDatalistOptions" placeholder="Gider Türünü Giriniz...">
-									  <option name="Kira" value="Kira"> Kira </option>
-									  <option name="Banka" value="Banka"> Banka </option>
-									  <option name="Ulasim" value="Ulaşım"> Ulaşım </option>
-									  <option name="Egitim_saglik" value="Eğitim & Sağlık"> Eğitim & Sağlık </option>
-									  <option name="Diger" value="Diğer Giderler"> Gider Giderler </option>
+								  <label for="giderTuru" class="form-label">Gider Kalemleri</label>
+								  <select name="giderTuru"  class="form-control" list="giderDatalistOptions" placeholder="Gider Türünü Giriniz...">
+									  <option value="Kira"> Kira </option>
+									  <option value="Banka"> Banka </option>
+									  <option value="Ulaşım"> Ulaşım </option>
+									  <option value="Eğitim & Sağlık"> Eğitim & Sağlık </option>
+									  <option value="Diğer Giderler"> Gider Giderler </option>
 								  </select>
 							  </div>
 							  <div class="col-lg-4">
@@ -120,33 +101,7 @@
 							  </div>
 						  </div>
 						  <div class="d-grid">
-							  <button id="giderSave" type="submit" class="mb-3 btn btn-sm btn-primary">Kaydet</button>
-						  </div>
-						  <ul id="giderList" class="list-group">
-                            
-							<% for(let i = 0; i < veriGider.length ; i++){ %>
-
-
-							  <li class="task list-group-item">
-     
-
-
-
-								  <div class="dropdown">
-									  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-										  <i class="fa-solid fa-ellipsis"></i>
-									  </button>
-								  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-									  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-trash-can"></i> Sil</a></li>
-									  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-pen"></i> Düzenle</a></li>
-								  </ul>
-							  </li>
-       
-							<% } %> 	  
-						
-							</ul>
-							<div class="card-text fs-3 mb-5 text-center text-danger">
-							  <p>Gider Toplam: <span class="giderToplam"></span></p>
+							  <button type="submit" class="mb-3 btn btn-sm btn-primary">Kaydet</button>
 						  </div>
 					  </div>
 					</div>

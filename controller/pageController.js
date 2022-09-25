@@ -1,20 +1,18 @@
 exports.getIndexPage = (req, res) => {
-    res.status(200).render('index');
+    console.log(req.session.userID);
+    res.status(200).render('index',{
+        page_name : "index"
+    });
 }
 
 exports.getLoginPage = (req, res) => {
-    res.status(200).render('login')
+    res.status(200).render('login', {
+        page_name : "login"
+    })
 }
 
 exports.getSignupPage = (req, res) => {
-    res.status(200).render('signup')
+    res.status(200).render('signup', {
+        page_name:"signup"
+    })
 }
-
-exports.getEvEkoMainPage = (req, res) => {
-    res.status(200).render('evEkoMain')
-}
-
-exports.getUserPage = (req, res) => {
-    res.status(200).render('userpage')
-}
-
