@@ -1,141 +1,100 @@
 <%- include('partials/_header'); %>
 <body class="m-5">
-<%- include('partials/_navigation') %>
+  <%- include('partials/_navigation') %>
 
-	<main class="container mt-3 py-1 shadow-lg rounded " >
-		<div class="accordion mt-5" id="accordionPanelsStayOpenExample">
-			<!-- <form action="gelirs" method="POST">
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="panelsStayOpen-headingOne">
-					  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-						Gelir Kalemleri
-					  </button>
-					</h2>
-					<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-					  <div class="accordion-body">
-						  <div class="row">
-							  <div class="col-lg-4 my-3">
-								  <label for="exampleDataList" class="form-label">Gelir Kalemleri</label>
-								  <input id="dataList" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Gelir Türünü Giriniz...">
-								  <datalist id="datalistOptions">
-									  <option value="Maaş">
-									  <option value="Kira">
-									  <option value="Ek İş">
-									  <option value="Diğerleri">
-								  </datalist>
-							  </div>
-							  <div class="col-lg-4 my-3">
-								  <label for="" class="form-label">Kişi</label>
-								  <input type="text" name="" id="kisi" class="form-control" placeholder="Kişi Giriniz Lütfen...">
-							  </div>
-							  <div class="col-lg-4 my-3">
-								  <label for="" class="form-label">Tutar</label>
-								  <input type="number" name="" id="tutar" class="form-control" placeholder="Tutar Giriniz Lütfen...">
-							  </div>
-						  </div>
-						  <div class="d-grid">
-							  <button id="gelirSave" type="submit" class="mb-3 btn btn-sm btn-primary">Kaydet</button>
-						  </div>
-						  <ul id="gelirList" class="list-group">
-							  <li class="task list-group-item">
-								  <div class="dropdown">
-									  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-										  <i class="fa-solid fa-ellipsis"></i>
-									  </button>
-								  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-									  <li><a onclick="deleteTask(1)" class="dropdown-item" href="#"><i class="fa-solid fa-trash-can"></i> Sil</a></li>
-									  <li><a onclick="editTask(1)" class="dropdown-item" href="#"><i class="fa-solid fa-pen"></i> Düzenle</a></li>
-								  </ul>
-							  </li>
-							  <li class="list-group-item"><span>tür </span><span>kişi </span><span>tutar </span></li>
-							</ul>
-							<div class="card-text fs-3 mb-5 text-center text-danger">
-							  <p>Gelir Toplam: <span class="gelirToplam"></span></p>
-						  </div>
-					  </div>
-					</div>
-				  </div>
+  <main class="container mt-3 py-1 shadow-lg rounded">
+    <div class="accordion mt-5" id="accordionPanelsStayOpenExample">
+      <form action="verigiris/add_giders" method="POST">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo"
+              aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseTwo"
+            >
+              Gider Ekle
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="panelsStayOpen-headingTwo"
+          >
+            <div class="accordion-body">
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <label for="ay" class="form-label">Gider Kalemleri</label>
+                  <select
+                    name="ay"
+                    class="form-control"
+                    list="giderDatalistOptions"
+                    placeholder="İlgili Dönemi Seçiniz"
+                  >
+                    <option value="Ocak 2022">Ocak</option>
+                    <option value="Şubat 2022">Şubat</option>
+                    <option value="Mart 2022">Mart</option>
+                    <option value="Nisan 2022">Nisan</option>
+                    <option value="Mayıs 200">Mayıs</option>
+                  </select>
+                </div>
+                <div class="col-lg-4">
+                  <label for="giderTuru" class="form-label">Gider Türü</label>
+                  <select name="giderTuru" id="">
+                    <option value="Banka">Banka</option>
+                    <option value="Egitim&Saglik">Eğitim & Sağlık</option>
+                    <option value="Ulaşım">Ulaşım</option>
+                    <option value="Diger">Diğer Giderler</option>
+                  </select>
+                </div>
+                <div class="col-lg-4">
+                  <label for="donem" class="form-label">Gider Kalemleri</label>
+                  <select
+                    name="kategori"
+                    class="form-control"
+                    list="giderDatalistOptions"
+                    placeholder="Gider Türünü Giriniz..."
+                  >
+					<% for(let x in kategori){ %> 
+                    <option value="<%= kategori[x]._id %>">
+                    <%= kategori[x].name %>
+                    </option>
+					<% } %>
+                  </select>
+                </div>
+                <div class="col-lg-4">
+                  <label for="description" class="form-label">Açıklama</label>
+                  <input
+                    type="text"
+                    name="description"
+                    class="form-control"
+                    placeholder="Açıklama Giriniz Lütfen..."
+                  />
+                </div>
+                <div class="col-lg-4">
+                  <label for="tutar" class="form-label">Tutar</label>
+                  <input
+                    type="number"
+                    name="tutar"
+                    id="giderTutar"
+                    class="form-control"
+                    placeholder="Tutar Giriniz Lütfen..."
+                  />
+                </div>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="mb-3 btn btn-sm btn-primary">
+                  Kaydet
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
 
-
-
-			</form>
-		 -->
-			<!--  -->
-		 	<form action="verigiris/add_giders" method="POST">
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-					  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-						  Gider Ekle
-					  </button>
-					</h2>
-					<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-					  <div class="accordion-body">
-						  <div class="row mb-3">
-							<div class="col-lg-4 ">
-								<label for="ay" class="form-label">Gider Kalemleri</label>
-								<select name="ay"  class="form-control" list="giderDatalistOptions" placeholder="Gider Türünü Giriniz...">
-									<option value="Ocak"> Ocak </option>
-									<option value="Şubat"> Şubat </option>
-									<option value="Mart"> Mart </option>
-									<option value="Nisan"> Nisan </option>
-									<option value="Mayıs"> Mayıs </option>
-								</select>
-							</div>
-							  <div class="col-lg-4 ">
-								  <label for="giderTuru" class="form-label">Gider Kalemleri</label>
-								  <select name="giderTuru"  class="form-control" list="giderDatalistOptions" placeholder="Gider Türünü Giriniz...">
-									  <option value="Kira"> Kira </option>
-									  <option value="Banka"> Banka </option>
-									  <option value="Ulaşım"> Ulaşım </option>
-									  <option value="Eğitim & Sağlık"> Eğitim & Sağlık </option>
-									  <option value="Diğer Giderler"> Gider Giderler </option>
-								  </select>
-							  </div>
-							  <div class="col-lg-4">
-								  <label for="description" class="form-label">Açıklama</label>
-								  <input type="text" name="description" class="form-control" placeholder="Açıklama Giriniz Lütfen...">
-							  </div>
-							  <div class="col-lg-4">
-								  <label for="tutar" class="form-label">Tutar</label>
-								  <input type="number" name="tutar" id="giderTutar" class="form-control" placeholder="Tutar Giriniz Lütfen...">
-							  </div>
-						  </div>
-						  <div class="d-grid">
-							  <button type="submit" class="mb-3 btn btn-sm btn-primary">Kaydet</button>
-						  </div>
-					  </div>
-					</div>
-				  </div>
-			</form>
-			<!--  -->
-			<div class="accordion-item">
-			  <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-				  Sonuç & Grafik
-				</button>
-			  </h2>
-			  <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-				<div class="accordion-body">
-				  <div class="row">
-					<div class="col-lg-12 text-center text-danger">
-						<h3>Sonuç <span class="sonuc text-primary"></span></h3>
-					</div>
-					<div class="col-12">
-						<div class="text-center d-flex justify-content-center" id="here">
-							<canvas id="myChart">
-				
-							</canvas>
-						</div>
-					</div>
-				  </div>
-
-
-
-
-				</div>
-			  </div>
-			</div>
-		  </div>
-	</main>
-
-	<%- include('partials/_footer'); %>
+  <%- include('partials/_footer'); %>
+</body>

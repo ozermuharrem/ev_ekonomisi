@@ -13,7 +13,7 @@ exports.getUserPage = async (req , res ) => {
         const user = await User.findOne({_id : req.session.userID});
         const veriGider = await Gider.find();
         const kategori =  await Kategori.find();
-    
+  
         res.status(200).render('userpage',{
             user,
             veriGider,
@@ -30,9 +30,12 @@ exports.getUserPage = async (req , res ) => {
 
 }
 
-exports.getVeriGirisPage = (req, res) => {
+exports.getVeriGirisPage = async (req, res) => {
     try {
-        res.status(200).render('veriGiris');
+        const kategori = await Kategori.find(); //! buraya bakılacak
+        res.status(200).render('veriGiris', {
+            kategori
+        });
     } catch (error) {
         res.status(404).json({
             status : "veriGiris Ekranına Ulaşılamadı",
@@ -61,11 +64,11 @@ exports.createGider = async (req, res) =>{
 exports.getAllGiders = async (req,res) => {
     try{
     const veriGider = await Gider.find();
-    const kategori =  await Kategori.find();
+    const kategoris =  await Kategori.find();
 
     res.status(200).render('evEkoMain',{
             veriGider,
-            kategori,
+            kategoris,
             toplam
         })
     }catch(error){

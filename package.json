@@ -10,7 +10,8 @@
   "author": "mozer",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "prettier": "2.7.1"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
