@@ -17,8 +17,6 @@ app.set("view engine","ejs"); //* app.set("view engine", "ejs");
 
 
 //? db 
-
-//! mongoose.connect('mongodb+srv://mozer-evEkonomisi:l8TQlK55SCnOPSdG@cluster0.7pfm0dq.mongodb.net/evEconomisi?retryWrites=true&w=majority')
 mongoose.connect('mongodb://localhost/ev_eko_db')
 .then(() => {
     console.log("veri tabanına bağlandı")
@@ -31,8 +29,7 @@ app.use(
     session({
         secret: 'my_keyboard_cat', // ? Buradaki texti değiştireceğiz.
         resave: false,
-        saveUninitialized: true,
-    //!   store: MongoStore.create({ mongoUrl: 'mongodb+srv://mozer-evEkonomisi:l8TQlK55SCnOPSdG@cluster0.7pfm0dq.mongodb.net/evEconomisi?retryWrites=true&w=majority' })
+        saveUninitialized: true;
         store: MongoStore.create({mongoUrl: 'mongodb://localhost/ev_eko_db'})
     })
 );
