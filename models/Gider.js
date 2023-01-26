@@ -1,15 +1,8 @@
-const { default: mongoose } = require('mongoose');
-const mongooser = require('mongoose');
-const slugify = require('slugify'); 
 
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const GiderSchema = new Schema({
-    ay : {
-        type : String,
-        required : true
-
-    },
     giderTuru : {
         type: String,
         required : true
@@ -17,11 +10,13 @@ const GiderSchema = new Schema({
     description : {
         type : String,
         required : true
-
     },
     tutar : {
         type : Number,
         required : true
+    },
+    vade : {
+        type : Date,
     },
     createDate : {
         type: Date,
@@ -30,16 +25,12 @@ const GiderSchema = new Schema({
     kategori: {
         type:mongoose.Schema.Types.ObjectId,
         ref : 'Kategori'
+    },
+    user : {
+        type:mongoose.Schema.Types.ObjectId,
+        ref : 'User'
     }
-})
-
-GiderSchema.pre('save', function(next){
-    this.slug = slugify(this.ay, {
-        lower : true,
-        strict:true
-    })
-    next();
-})
+});
 
 const Gider = mongoose.model('gider', GiderSchema);
 

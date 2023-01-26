@@ -9,9 +9,21 @@
     <header class="text-center mt-3 text-muted">
         <h1>Ev Ekonomisi</h1>
     </header>
+
+
+
     <section>
         <div class="container">
             <div class="row ortala">
+
+                <% if(userIN){ %>
+                
+                    <div class="">
+                        <img class="rounded" src="../images/money-gif-1.gif" alt="">
+                    </div>
+
+
+                <%}else{%>
                 <div class="col-lg-6">
                     <a href="/login" class="btn btn-outline-primary">
                         <i class="fa-solid fa-right-to-bracket fa-3x"></i>
@@ -25,6 +37,7 @@
                     </a>
 
                 </div>
+                <%}%>
             </div>
 
 

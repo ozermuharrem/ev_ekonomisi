@@ -12,10 +12,13 @@
     -->
 
     <div class="container">
-        <div class="d-flex">
-            <div class="p-2 flex-fill">User Name : <%= user.name %></div>
-            <div class="p-2 flex-fill"><a href="userpage/veriGiris"> Veri Ekle</a></div>
-            <div class="p-2 flex-fill">Çıkış</div>
+        <div class="d-flex justify-content-center">
+            <div class="p-2">
+                <i class="fa-solid fa-user-secret"></i>
+                 <%= user.name %></div>
+            <div class="p-2"><a class="nav-link" href="userpage/veriGiris">
+                <i class="fa-solid fa-plus"></i>
+                   Veri Ekle</a></div>
           </div>
     </div>
 <!--
@@ -34,22 +37,73 @@
     </div>
      -->
 
-
      <main class="">
         <div class="container">
-            <div class="d-flex justifay-content-center">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Ocak</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">
-                            Genel Durum <span> 5000 TL</span>
+            <div class="row">
+                <% for(let k in kategori){ %>
+                <div class="mb-2 col-lg-3 col-md-4 col-sm-6">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3><a class="nav-link" href="/userpage/<%= kategori[k].slug %>"><%= kategori[k].name %></a></h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">
+                                Genel Durum <span class="genelDurum"><%= (gelirTpl[k] -giderTpl[k]).toFixed(2) %> TL</span>
+                            </div>
                         </div>
                     </div>
+  
                 </div>
+                <% } %>
             </div>
         </div>
      </main>
+
+     <section class="container mt-5">
+        <h5 class="text-muted">Eklenen Son 5 Gider</h5>
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Dönem</th>
+                <th scope="col">Gider Turu</th>
+                <th scope="col">Açıklama</th>
+                <th scope="col">Tutar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i in veriGider){ %>
+                <tr>
+                    <th scope="row"><%= i %></th>
+                    <% for(let x in kategori){ %>
+                        <% if(JSON.stringify(kategori[x]._id) == JSON.stringify(veriGider[i].kategori)){ %>
+                        <td> <%= kategori[x].name %></td> 
+                         <%} %>
+                    <%} %>
+                    <td><%= veriGider[i].giderTuru %></td>
+                    <td><%= veriGider[i].description %></td>
+                    <td><%= veriGider[i].tutar %></td>
+                </tr>
+                <% } %>
+
+            </tbody>
+          </table>
+     </section>
+
+     <script>
+        const genelDurum = document.querySelectorAll(".genelDurum");
+        let i = 0;
+        while(i <= genelDurum.length)
+        {
+            if(genelDurum[i].textContent[0] == '-')
+                genelDurum[i].parentElement.parentElement.parentElement.classList.add('bg-danger');
+            else if(genelDurum[i].textContent[0] == '0')
+                genelDurum[i].parentElement.parentElement.parentElement.classList.add("bg-none");
+            else
+                genelDurum[i].parentElement.parentElement.parentElement.classList.add('bg-info');
+            i++;
+        }
+
+     </script>
 
 <%- include('partials/_footer') %>

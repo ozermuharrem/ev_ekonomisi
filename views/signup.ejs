@@ -4,7 +4,13 @@
 <%- include('partials/_navigation') %>
 
     <div class="container">
-        <div class="ortala text-dark">
+        <div class="ortala signup-bg" style="color: rgb(6, 0, 0);">
+
+          <% if(flashMesaj){%>
+            <% if(flashMesaj.hata){%>
+              <div class="alert alert-danger"> <%= flashMesaj.hata %></div>  
+            <%}%>
+          <%}%>
             <form action="users/signup" method="POST">
               <div class="mb-3">
                 <label for="exampleInputName" class="form-label">İsim Soyisim</label>

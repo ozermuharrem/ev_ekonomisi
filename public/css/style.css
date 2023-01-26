@@ -33,6 +33,13 @@
 	min-height:100%;
 }
 
+.login-bg{
+    padding-top: 75px ;
+    width: 500px;
+    height: 500px;
+    background: #7777;
+}
+
 /* signup */
 
 
@@ -44,6 +51,13 @@
 	min-height:100%;
 }
 
+.signup-bg{
+    padding-top: 75px ;
+    width: 500px;
+    height: 500px;
+    background: #7777;
+}
+
 .ortala{
     position: absolute;
     top:50%;
@@ -52,11 +66,16 @@
     border-radius: 15px;
     padding: 75px;
 }
+.ortala-text{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 15px;
+    padding: 5px;
+}
 
 .nav-hover:hover{
     background-color: orange;
 }
 
-/* #transparan{
- background-color: #BAD3DA!important;
-} */

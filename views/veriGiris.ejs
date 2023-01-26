@@ -3,7 +3,15 @@
   <%- include('partials/_navigation') %>
 
   <main class="container mt-3 py-1 shadow-lg rounded">
-    <div class="accordion mt-5" id="accordionPanelsStayOpenExample">
+    <div class="accordion my-5" id="accordionPanelsStayOpenExample">
+      <% if(flashMesaj){%>
+        <% if(flashMesaj.giderBasarili){ %>
+          
+          <div class="alert alert-success"> <%= flashMesaj.giderBasarili %></div>  
+        <% }else if(flashMesaj.giderHata){%>
+          <div class="alert alert-danger"> <%= flashMesaj.giderHata %></div>  
+        <%}%>
+      <%}%>
       <form action="verigiris/add_giders" method="POST">
         <div class="accordion-item">
           <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
@@ -26,42 +34,29 @@
             <div class="accordion-body">
               <div class="row mb-3">
                 <div class="col-lg-4">
-                  <label for="ay" class="form-label">Gider Kalemleri</label>
-                  <select
-                    name="ay"
-                    class="form-control"
-                    list="giderDatalistOptions"
-                    placeholder="İlgili Dönemi Seçiniz"
-                  >
-                    <option value="Ocak 2022">Ocak</option>
-                    <option value="Şubat 2022">Şubat</option>
-                    <option value="Mart 2022">Mart</option>
-                    <option value="Nisan 2022">Nisan</option>
-                    <option value="Mayıs 200">Mayıs</option>
-                  </select>
-                </div>
-                <div class="col-lg-4">
-                  <label for="giderTuru" class="form-label">Gider Türü</label>
-                  <select name="giderTuru" id="">
+                  <label for="giderTuru"  class="form-label">Gider Türü</label>
+                  <select name="giderTuru" onchange="myFunction()" id="giderTuru" class="form-control">
+                    <option value="Kira">Kira</option>
                     <option value="Banka">Banka</option>
                     <option value="Egitim&Saglik">Eğitim & Sağlık</option>
                     <option value="Ulaşım">Ulaşım</option>
+                    <option value="Fatura">Fatura</option>
                     <option value="Diger">Diğer Giderler</option>
                   </select>
                 </div>
                 <div class="col-lg-4">
-                  <label for="donem" class="form-label">Gider Kalemleri</label>
+                  <label for="donem" class="form-label">Dönem Seçin</label>
                   <select
                     name="kategori"
                     class="form-control"
                     list="giderDatalistOptions"
                     placeholder="Gider Türünü Giriniz..."
                   >
-					<% for(let x in kategori){ %> 
+					          <% for(let x in kategori){ %> 
                     <option value="<%= kategori[x]._id %>">
                     <%= kategori[x].name %>
                     </option>
-					<% } %>
+					          <% } %>
                   </select>
                 </div>
                 <div class="col-lg-4">
@@ -80,6 +75,106 @@
                     name="tutar"
                     id="giderTutar"
                     class="form-control"
+                    step="0.01"
+                    placeholder="Tutar Giriniz Lütfen..."
+                  />
+                </div>
+                <div class="col-lg-4 d-none" id="vade">
+                  <label for="tutar" class="form-label">Vade Eklemek İstermisin</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-text">
+                      <input class="form-check-input mt-0" type="checkbox" id="vadeCheck" value="" aria-label="Checkbox for following text input">
+                    </div>
+                    <input id="dateInput" type="date" name="vade" class="form-control" disabled aria-label="Text input with checkbox">
+                  </div>
+    
+                </div>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="mb-3 btn btn-sm btn-primary">
+                  Kaydet
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <main class="container mt-3 py-1 shadow-lg rounded">
+    <div class="accordion my-5" id="gelir">
+      <% if(flashMesaj){%>
+        <% if(flashMesaj.gelirBasarili){ %>
+          
+          <div class="alert alert-success"> <%= flashMesaj.gelirBasarili %></div>  
+        <% }else if(flashMesaj.gelirHata){%>
+          <div class="alert alert-danger"> <%= flashMesaj.gelirHata %></div>  
+        <%}%>
+      <%}%>
+      <form action="verigiris/add_gelirs" method="POST">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="gelir-headingTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#gelir-collapseTwo"
+              aria-expanded="false"
+              aria-controls="gelir-collapseTwo"
+            >
+              Gelir Ekle
+            </button>
+          </h2>
+          <div
+            id="gelir-collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="gelir-headingTwo"
+          >
+            <div class="accordion-body">
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <label for="gelirTuru" class="form-label">Gelir Türü</label>
+                  <select name="gelirTuru" id="" class="form-control">
+                    <option value="Maaş">Maaş</option>
+                    <option value="Pasif Gelir">Pasif Gelir</option>
+                    <option value="Mevduat">Mevduat</option>
+                    <option value="Döviz">Döviz</option>
+                    <option value="Kıymetli Maden">Kıymetli Maden</option>
+                    <option value="Diger Gelir">Diğer Gelirler</option>
+                  </select>
+                </div>
+                <div class="col-lg-4">
+                  <label for="donem" class="form-label">Dönem Seçin</label>
+                  <select
+                    name="kategori"
+                    class="form-control"
+                    list="giderDatalistOptions"
+                  >
+					          <% for(let x in kategori){ %> 
+                    <option value="<%= kategori[x]._id %>">
+                    <%= kategori[x].name %>
+                    </option>
+					          <% } %>
+                  </select>
+                </div>
+                <div class="col-lg-4">
+                  <label for="gelirDescription" class="form-label">Açıklama</label>
+                  <input
+                    type="text"
+                    name="gelirDescription"
+                    class="form-control"
+                    placeholder="Açıklama Giriniz Lütfen..."
+                  />
+                </div>
+                <div class="col-lg-4">
+                  <label for="gelirTutar" class="form-label">Tutar</label>
+                  <input
+                    type="number"
+                    name="gelirTutar"
+                    id="giderTutar"
+                    class="form-control"
+                    step="0.01"
                     placeholder="Tutar Giriniz Lütfen..."
                   />
                 </div>
@@ -97,4 +192,60 @@
   </main>
 
   <%- include('partials/_footer'); %>
+
+  <script>
+  
+  let checkbox_check = (input)=>{
+      if(input.checked === true){
+        dateInput.getAttribute("disabled");
+        dateInput.removeAttribute("disabled");
+      }
+      else{
+        // dateInput.getAttribute("disabled");
+        dateInput.setAttribute("disabled","");
+        dateInput.value = "";
+      }
+
+        console.log(false);
+  }
+
+
+function myFunction() {
+  let x = document.getElementById("giderTuru").value;
+  let vadeCheck = document.getElementById("vadeCheck");
+  let dateInput = document.getElementById("dateInput");
+  let vade = document.querySelector("#vade");
+  console.log(vadeCheck.checked)
+  if(x === 'Fatura')
+  {
+    vade.classList.remove("d-none");
+
+    vadeCheck.addEventListener("change", function() {
+      checkbox_check(vadeCheck);
+    if (this.checked) {
+        dateInput.getAttribute("disabled");
+        dateInput.removeAttribute("disabled");
+    } else if(this.unchacked) {
+      // dateInput.getAttribute("disabled");
+      // dateInput.setAttribute("disabled");
+      console.log("uncheck")
+    }
+})
+
+
+
+
+    // if (vadeCheck.checked) {
+    //     dateInput.getAttribute("disabled");
+    //     dateInput.removeAttribute("disabled");
+    // } else {
+    //     console.log("hahah");
+    // }
+  }
+  else
+    vade.classList.add("d-none")
+
+
+}
+  </script>
 </body>

@@ -5,15 +5,11 @@ exports.createUser = async (req, res) => {
     try{
         const user = await User.create(req.body);
 
-        res.status(200).json({
-            status : 'başarılı',
-            user
-        })
+        req.flash("basarili", "Kayıt Başarılı...");
+        res.status(200).redirect('/login')
     }catch(error){
-        res.status(400).json({
-            status : 'fail',
-            error,
-        })
+        req.flash("hata", "Kayıt Başarısız...");
+        res.status(400).redirect('/signup');
     }
 }
 

@@ -1,0 +1,321 @@
+<%- include('partials/_header') %>
+
+<body>
+
+    <%- include('partials/_navigation') %>
+
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="p-2">
+                <i class="fa-solid fa-user-secret"></i>
+                 <%= user.name %>
+            </div>
+            <div class="p-2"><a class="nav-link" href="/userpage/veriGiris">
+                <i class="fa-solid fa-plus"></i>
+                   Veri Ekle</a>
+            </div>
+            <div class="p-2">
+                <i class="fa-solid fa-calendar-days"></i>
+                    <%= kategori.name %>
+            </div>
+            <div class="p-2">
+              <i class="fa-solid fa-download"></i>
+              <a href="/userpage/downloadExcell/<%= kategori.slug %>" style="text-decoration:none; color: black;" >Excell İndir</a>
+            </div>
+          </div>
+    </div>
+
+    <div class="container">
+      <div style="height: 100px;" class="card bg-success d-flex justify-content-center">
+        <h5 class="ortala-text text-center"> Genel Durum : <%= genelDurum %> TL</h5>  
+      </div>        
+    </div>
+
+
+
+    <main class="container mt-1">
+      <div class="row mt-2" style="height: 100%;">
+        <!-- gelir -->
+        <div class="col-lg-6 border border-secondary border-start-0 border-bottom-0">
+            <div style="height: 50px;" class="card mt-1 bg-danger">
+              <h5 class="ortala-text text-center">TOPLAM GELİR <%= toplamGelir %> TL</h5>  
+            </div>
+          <div class="d-flex container mt-2">
+            <table class="table table-hover table-striped">
+                <thead class="bg-dark text-light text-center">
+                    <tr>
+                    <th scope="col">Dönem</th>
+                    <th scope="col">Gelir Turu</th>
+                    <th scope="col">Açıklama</th>
+                    <th scope="col">Tutar</th>
+                    <th scope="col"> Aksiyon</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <% for(let z in veriGelir){ %>
+                    <tr class="text-center">    
+                        <td> <%= kategori.name %></td> 
+                        <td><%= veriGelir[z].gelirTuru %></td>
+                        <td><%= veriGelir[z].gelirDescription %></td>
+                        <td><%= veriGelir[z].gelirTutar %></td>
+                        <td class="">
+                            <div class="row">
+                              <div class="dropdown">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li>                                  
+                                      <a class="dropdown-item" href="/userpage/<%= veriGelir[z]._id %>?_method=DELETE" onclick="return confirm('Emin Misin ?')">
+                                        <i class="fa-solid fa-trash-can"></i> Sil
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateGider<%= veriGelir[z]._id %>" >
+                                        <i class="fa-solid fa-pen"></i> 
+                                        Düzenle
+                                      </button>
+                                    </li>
+                                  </ul>
+                              </div>
+                            </div>
+                        </td>
+                    </tr>
+    
+                    <!-- Modal -->
+                    <div class="modal fade" id="updateGider<%= veriGelir[z]._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Gelir Güncelleme</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/userpage/<%= veriGelir[z]._id %>?_method=PUT" method="POST">
+                                          <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                              <label for="gelirTuru" class="form-label">Gelir Türü</label>
+                                              <select value="<%= veriGelir[z].gelirTuru %>" name="gelirTuru" id="" class="form-control">
+                                                <option value="Maaş">Maaş</option>
+                                                <option value="Pasif Gelir">Pasif Gelir</option>
+                                                <option value="Mevduat">Mevduat</option>
+                                                <option value="Döviz">Döviz</option>
+                                                <option value="Kıymetli Maden">Kıymetli Maden</option>
+                                                <option value="Diger Gelir">Diğer Gelirler</option>
+                                              </select>
+                                            </div>
+       
+                                            <div class="col-lg-4">
+                                              <label for="gelirDescription" class="form-label">Açıklama</label>
+                                              <input
+                                                type="text"
+                                                name="gelirDescription"
+                                                class="form-control"
+                                                value="<%= veriGelir[z].gelirDescription %>"
+                                              />
+                                            </div>
+                                            <div class="col-lg-4">
+                                              <label for="gelirTutar" class="form-label">Tutar</label>
+                                              <input type="number" step="0.01" name="gelirTutar" id="giderTutar" class="form-control" value="<%= veriGelir[z].gelirTutar %>"/>
+                                            </div>
+                                          </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                                        </div>
+                                  </form>
+                            </div>
+                       
+                        </div>
+                        </div>
+                    </div>
+                    <% } %>
+    
+                </tbody>
+              </table>
+            </div>
+            <div class="grafik">
+              <canvas width="250px" height="90%" aria-label="Hello ARIA World" role="img" id="gelirChart"></canvas>
+            </div>
+        </div>
+        
+        
+        
+        <!-- gider -->
+        <div class="col-lg-6 border border-secondary border-end-0 border-bottom-0">
+          <div style="height: 50px;" class="card mt-1 bg-info">
+            <h5 class="ortala-text text-center">TOPLAM GİDER <%= toplam %> TL</h5>  
+          </div>
+          <div class="container mt-2">
+            <table class="table table-hover table-striped">
+                <thead class="bg-dark text-light text-center">
+                    <tr>
+                    <th scope="col">Dönem</th>
+                    <th scope="col">Gider Turu</th>
+                    <th scope="col">Açıklama</th>
+                    <th scope="col">Tutar</th>
+                    <th scope="col"> Aksiyon</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <% for(let i in veriGider){ %>
+                    <tr class="text-center">
+                        <td> <%= kategori.name %></td> 
+                        <td><%= veriGider[i].giderTuru %></td>
+                        <td><%= veriGider[i].description %></td>
+                        <td><%= veriGider[i].tutar %></td>
+                        <td class="">
+                            <div class="row">
+                              <div class="dropdown">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li>                                  
+                                      <a class="dropdown-item" href="/userpage/<%= veriGider[i]._id %>?_method=DELETE" onclick="return confirm('Emin Misin ?')">
+                                        <i class="fa-solid fa-trash-can"></i> Sil
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updateGider<%= veriGider[i]._id %>" >
+                                        <i class="fa-solid fa-pen"></i> 
+                                        Düzenle
+                                      </button>
+                                    </li>
+                                  </ul>
+                              </div>
+                            </div>
+                        </td>
+                    </tr>
+    
+                    <!-- Modal -->
+                    <div class="modal fade" id="updateGider<%= veriGider[i]._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Gider Güncelleme</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/userpage/<%= veriGider[i]._id %>?_method=PUT" method="POST">
+                                          <div class="row mb-3">
+                                            <div class="col-lg-4">
+                                              <label for="giderTuru" class="form-label">Gider Türü</label>
+                                              <select value="<%= veriGider[i].giderTuru %>" name="giderTuru" id="" class="form-control">
+                                                <option value="Kira">Kira</option>
+                                                <option value="Banka">Banka</option>
+                                                <option value="Egitim&Saglik">Eğitim & Sağlık</option>
+                                                <option value="Ulaşım">Ulaşım</option>
+                                                <option value="Diger">Diğer Giderler</option>
+                                              </select>
+                                            </div>
+       
+                                            <div class="col-lg-4">
+                                              <label for="description" class="form-label">Açıklama</label>
+                                              <input
+                                                type="text"
+                                                name="description"
+                                                class="form-control"
+                                                value="<%= veriGider[i].description %>"
+                                              />
+                                            </div>
+                                            <div class="col-lg-4">
+                                              <label for="tutar" class="form-label">Tutar</label>
+                                              <input type="number" step="0.01" name="tutar" id="giderTutar" class="form-control" value="<%= veriGider[i].tutar %>"/>
+                                            </div>
+                                          </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                                        </div>
+                                  </form>
+                            </div>
+                       
+                        </div>
+                        </div>
+                    </div>
+                    <% } %>
+    
+                </tbody>
+              </table>
+            </div>
+            <div class="grafik">
+              <canvas width="250px" height="90%" aria-label="Hello ARIA World" role="img" id="giderChart"></canvas>
+            </div>
+        </div>
+      </div>  
+    </main>
+
+
+    <script>
+const giderChart = document.getElementById('giderChart')
+const gelirChart = document.getElementById('gelirChart')
+
+  new Chart(giderChart, {
+      type: 'bar',
+      data: {
+        labels: ['Kira', 'Banka', 'Eğitim & Sağlık', 'Ulaşım','Fatura', 'Diğer'],
+        datasets: [{
+          label : "Gider",
+          data: [parseFloat("<%= giderDetay[0] %>"),parseFloat("<%= giderDetay[1] %>"),parseFloat("<%= giderDetay[2] %>"),parseFloat("<%= giderDetay[3] %>"),parseFloat("<%= giderDetay[4] %>")],
+          backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)'
+        ],
+          borderWidth: 1
+        }],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    new Chart(gelirChart, {
+      type: 'bar',
+      data: {
+        labels: ['Maaş', 'Pasif Gelir', 'Mevduat', 'Döviz', 'Kıymetli Maden', 'Diğer Gelirler'],
+        datasets: [{
+          label : "Gelir",
+          data: [parseFloat("<%= gelirDetay[0] %>"),parseFloat("<%= gelirDetay[1] %>"),parseFloat("<%= gelirDetay[2] %>"),parseFloat("<%= gelirDetay[3] %>"),parseFloat("<%= gelirDetay[4] %>"),parseFloat("<%= gelirDetay[5] %>")],
+          backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)'
+        ],
+          borderWidth: 1
+        }],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    </script>
+
+    <%- include('partials/_footer') %>
